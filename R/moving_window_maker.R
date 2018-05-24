@@ -36,7 +36,8 @@ moving_window_maker <- function(raster_stack, window_dims_v, parallel = FALSE) {
       fun = rao_on_vector)
   }
 
-  if (!"raster" %in% class(raster_stack)) stop("Do not know what to do with a ", class(raster_stack), " object; expecting a 'raster' object to run parallel computation of Rao's index.")
+  if (!any(c("RasterLayer", "RasterStack", "RasterBrick") %in% class(raster_stack)))
+    stop("Do not know what to do with a ", class(raster_stack), " object; expecting a 'raster' object to run parallel computation of Rao's index.")
   if (is.even(prod(window_dims_v))) stop("Moving window dimensions must be odd, instead given ", window_dims_v[1], "x", window_dims_v[2], ".")
   if (parallel) {
     if (!requireNamespace("spatial.tools", quietly = TRUE)) stop("Need 'spatial.tools' package to run parallel spatial computation.")

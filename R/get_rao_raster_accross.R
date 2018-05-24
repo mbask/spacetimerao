@@ -22,7 +22,8 @@ get_rao_raster_accross <- function(raster_stack, cl_sock = NULL) {
       MARGIN = c(1, 2),
       FUN    = spacetimerao::get_rao_index)
   } else {
-    if (!"cluster" %in% class(raster_stack))  stop("Do not know what to do with a ", class(cl_sock), " object; expecting a 'cluster' object to run parallel computation of Rao's index.")
+    if (!any(c("RasterStack", "RasterBrick") %in% class(raster_stack)))
+      stop("Do not know what to do with a ", class(cl_sock), " object; expecting a 'cluster' object to run parallel computation of Rao's index.")
     if (!requireNamespace("parallel", quietly = TRUE)) stop("Need 'parallel' package to run parallel temporal computation.")
 
     rao_m <- parallel::parApply(
