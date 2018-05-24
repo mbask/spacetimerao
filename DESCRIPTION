@@ -6,14 +6,17 @@ Authors@R: as.person("Marco Bascietto <marco.bascietto@crea.gov.it> [aut, cre]")
 Description: Computes Rao's diversity index (Rao, 1982) on images, typically for remote sensing uses.
     The index is computed on numeric vectors and can be implemented spatially 
     on single-band images by moving windows, and temporally on single pixels 
-    accross multi-band images. Rao, C. R. (1982). Diversity and 
+    accross multi-band images. The package provides helper function to compute the 
+    index on spatial or temporal raster stacks, serially or using cores in parallel. Rao, C. R. (1982). Diversity and 
     dissimilarity coefficients: a unified approach. Theoretical Population Biology, 21(1), 24–43.
-)
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
 Suggests: 
-    testthat
+    testthat,
+    raster,
+    spatial.tools,
+    parallel
 Depends:
     RcppAlgos
