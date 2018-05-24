@@ -38,12 +38,15 @@ moving_window_maker <- function(raster_stack, window_dims_v, parallel = FALSE) {
 
   if (!any(c("RasterLayer", "RasterStack", "RasterBrick") %in% class(raster_stack)))
     stop("Do not know what to do with a ", class(raster_stack), " object; expecting a 'raster' object to run parallel computation of Rao's index.")
-  if (is.even(prod(window_dims_v))) stop("Moving window dimensions must be odd, instead given ", window_dims_v[1], "x", window_dims_v[2], ".")
+  if (is.even(prod(window_dims_v)))
+    stop("Moving window dimensions must be odd, instead given ", window_dims_v[1], "x", window_dims_v[2], ".")
   if (parallel) {
-    if (!requireNamespace("spatial.tools", quietly = TRUE)) stop("Need 'spatial.tools' package to run parallel spatial computation.")
+    if (!requireNamespace("spatial.tools", quietly = TRUE))
+      stop("Need 'spatial.tools' package to run parallel spatial computation.")
     rao_on_window_par
   } else {
-    if (!requireNamespace("raster", quietly = TRUE)) stop("Need 'raster' package to run Rao's index computation on rasters.")
+    if (!requireNamespace("raster", quietly = TRUE))
+      stop("Need 'raster' package to run Rao's index computation on rasters.")
     window_weight_m <- matrix(1 / prod(window_dims_v), nrow = window_dims_v[1], ncol = window_dims_v[2])
     rao_on_window_ser
   }

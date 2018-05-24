@@ -13,8 +13,11 @@
 #' @return a single layer raster with same extent as the \code{raster_stack} raster stack
 #' @export
 get_rao_raster_accross <- function(raster_stack, cl_sock = NULL) {
-  if (!requireNamespace("raster", quietly = TRUE)) stop("Need 'raster' package to run Rao's index computation on rasters.")
-  if (!"raster" %in% class(raster_stack)) stop("Do not know what to do with a ", class(raster_stack), " object; expecting a 'raster' object to run parallel computation of Rao's index.")
+  if (!requireNamespace("raster", quietly = TRUE))
+    stop("Need 'raster' package to run Rao's index computation on rasters.")
+
+  if (!any(c("RasterStack", "RasterBrick") %in% class(raster_stack)))
+    stop("Do not know what to do with a ", class(raster_stack), " object; expecting a 'raster' object to run parallel computation of Rao's index.")
 
   if (is.null(cl_sock)) {
     rao_m <- apply(
@@ -22,9 +25,11 @@ get_rao_raster_accross <- function(raster_stack, cl_sock = NULL) {
       MARGIN = c(1, 2),
       FUN    = spacetimerao::get_rao_index)
   } else {
-    if (!any(c("RasterStack", "RasterBrick") %in% class(raster_stack)))
+    if (!"cluster" %in% class(cl_sock))
       stop("Do not know what to do with a ", class(cl_sock), " object; expecting a 'cluster' object to run parallel computation of Rao's index.")
-    if (!requireNamespace("parallel", quietly = TRUE)) stop("Need 'parallel' package to run parallel temporal computation.")
+
+    if (!requireNamespace("parallel", quietly = TRUE))
+      stop("Need 'parallel' package to run parallel temporal computation.")
 
     rao_m <- parallel::parApply(
       cl     = cl_sock,
@@ -33,7 +38,8 @@ get_rao_raster_accross <- function(raster_stack, cl_sock = NULL) {
       FUN    = spacetimerao::get_rao_index)
   }
 
-  if (!is.matrix(rao_m)) stop("An error has occurred in apply spacetimerao::get_rao_index so that the matrix of Rao's index values was not produced")
+  if (!is.matrix(rao_m))
+    stop("An error has occurred in apply spacetimerao::get_rao_index so that the matrix of Rao's index values was not produced")
 
   raster::raster(
     x   = rao_m,
