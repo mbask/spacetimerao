@@ -1,0 +1,17 @@
+Package: spacetimerao
+Type: Package
+Title: Compute Rao's diversity index on numeric vectors and matrices
+Version: 0.1.0
+Authors@R: as.person("Marco Bascietto <marco.bascietto@crea.gov.it> [aut, cre]")
+Description: Computes Rao's diversity index on on images, typically for remote sensing uses.
+    The index is computed on numeric vectors and can be implemented spatially 
+    on single-band images by moving windows, and temporally on single pixels 
+    accross multi-band images.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
+Suggests: 
+    testthat
+Depends:
+    RcppAlgos
