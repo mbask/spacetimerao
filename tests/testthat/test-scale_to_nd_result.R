@@ -1,7 +1,7 @@
 context("test-scale_to_nd.R")
 
 test_that(
-  "scale_to_nd scales raster layers to [-1, 1] range. Minimum is -1",
+  "scale_to_nd scales raster layers to [-1, 1] range. Min is -1",
   {
     r   <- raster::raster(ncols = 36, nrows = 18)
     r[] <- 1:raster::ncell(r)
