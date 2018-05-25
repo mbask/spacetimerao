@@ -47,7 +47,10 @@ moving_window_maker <- function(raster_stack, window_dims_v, parallel = FALSE) {
   } else {
     if (!requireNamespace("raster", quietly = TRUE))
       stop("Need 'raster' package to run Rao's index computation on rasters.")
-    window_weight_m <- matrix(1 / prod(window_dims_v), nrow = window_dims_v[1], ncol = window_dims_v[2])
+    window_weight_m <- matrix(
+      data = 1 / prod(window_dims_v),
+      nrow = window_dims_v[1],
+      ncol = window_dims_v[2])
     rao_on_window_ser
   }
 }
