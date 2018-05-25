@@ -4,7 +4,8 @@
 #'
 #' @details Rao's quadratic entropy is a measure of diversity of ecological communities
 #' defined by Rao (1982) and is based on the proportion of the abundance of
-#' species present in a community and some measure of distance (dissimilarity) among them. Dissimilarity is defined as the euclidean distance.
+#' species present in a community and some measure of distance (dissimilarity)
+#' among them. Dissimilarity is defined as the euclidean distance.
 #' \deqn{\rho = \deqn{\sum_{ij}d_{ij} p_i p_j }}
 #'
 #' The function accepts a numeric value vector (or matrix of numeric values) and returns Rao's index.
