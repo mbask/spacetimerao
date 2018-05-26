@@ -2,26 +2,30 @@
 % Please edit documentation in R/moving_window_maker.R
 \name{moving_window_maker}
 \alias{moving_window_maker}
-\title{Return a function to perform the computatin of Rao's index on a moving window on a raster layer}
+\title{Return a function to perform the computatin of Rao's index on a moving
+window on a raster layer}
 \usage{
 moving_window_maker(raster_stack, window_dims_v, parallel = FALSE)
 }
 \arguments{
-\item{raster_stack}{a raster stack of layers that will be used by the returned function to calculate Rao'index}
+\item{raster_stack}{a raster stack of layers that will be used by the
+returned function to calculate Rao'index}
 
-\item{window_dims_v}{a 2 element numeric vector of the count of x and y pixels for the moving window}
+\item{window_dims_v}{a 2 element numeric vector of the count of x
+and y pixels for the moving window}
 
 \item{parallel}{whether or not to calculate the index in parallel}
 }
 \value{
-a function accepting a numeric index relative to the layer of the \code{raster_stack} where Rao's index has to be calculated
+a function accepting a numeric index relative to the layer
+        of the \code{raster_stack} where Rao's index has to be calculated
 }
 \description{
 The function computes, serially or in parallel, the spatial Rao's index
 on each layer of a raster stack on a moving window around a center pixel.
 
 The serial computation is carried out through the \code{raster::focal} function.
-The parallel computation takes advantage of the \code{spatial.tools::rasterEngine} function.
-The parallel cluster has to be initialized beforehand calling the returned
-function by \code{spatial.tools::sfQuickInit}.
+The parallel computation takes advantage of the \code{spatial.tools::rasterEngine}
+function. The parallel cluster has to be initialized beforehand calling
+the returned function by \code{spatial.tools::sfQuickInit}.
 }

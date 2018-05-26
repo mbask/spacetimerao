@@ -1,18 +1,22 @@
-#' Return a function to perform the computatin of Rao's index on a moving window on a raster layer
+#' Return a function to perform the computatin of Rao's index on a moving
+#' window on a raster layer
 #'
 #' @description The function computes, serially or in parallel, the spatial Rao's index
 #' on each layer of a raster stack on a moving window around a center pixel.
 #'
 #' The serial computation is carried out through the \code{raster::focal} function.
-#' The parallel computation takes advantage of the \code{spatial.tools::rasterEngine} function.
-#' The parallel cluster has to be initialized beforehand calling the returned
-#' function by \code{spatial.tools::sfQuickInit}.
+#' The parallel computation takes advantage of the \code{spatial.tools::rasterEngine}
+#' function. The parallel cluster has to be initialized beforehand calling
+#' the returned function by \code{spatial.tools::sfQuickInit}.
 #'
-#' @param raster_stack a raster stack of layers that will be used by the returned function to calculate Rao'index
-#' @param window_dims_v a 2 element numeric vector of the count of x and y pixels for the moving window
+#' @param raster_stack a raster stack of layers that will be used by the
+#'        returned function to calculate Rao'index
+#' @param window_dims_v a 2 element numeric vector of the count of x
+#'        and y pixels for the moving window
 #' @param parallel   whether or not to calculate the index in parallel
 #'
-#' @return a function accepting a numeric index relative to the layer of the \code{raster_stack} where Rao's index has to be calculated
+#' @return a function accepting a numeric index relative to the layer
+#'         of the \code{raster_stack} where Rao's index has to be calculated
 #' @export
 moving_window_maker <- function(raster_stack, window_dims_v, parallel = FALSE) {
 

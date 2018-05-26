@@ -9,16 +9,20 @@ get_rao_raster_accross(raster_stack, cl_sock = NULL)
 \arguments{
 \item{raster_stack}{the multi-layer raster stack}
 
-\item{cl_sock}{a \code{c("SOCKcluster", "cluster")} object as given by \code{parallel::makeCluster} or \code{NULL} to perform serial computation}
+\item{cl_sock}{a \code{c("SOCKcluster", "cluster")} object as given by
+\code{parallel::makeCluster} or \code{NULL} (default) to
+perform serial computation}
 }
 \value{
-a single layer raster with same extent as the \code{raster_stack} raster stack
+a single layer raster with same extent as the
+\code{raster_stack} raster stack
 }
 \description{
-Temporal Rao's index is calculated through the \code{spacetimerao::get_rao_index}
-on the values each pixel of the raster stack has accross the stack layers.
+Temporal Rao's index is calculated through the
+\code{spacetimerao::get_rao_index} on the values each pixel of
+the raster stack has accross the stack layers.
 
-Computation can be parallelized if a \code{cluster} object is passed to \code{cl_sock} argument.
-The function uses the \code{parallel} package, the set of copies of R running in
-has to be already in place.
+Computation can be parallelized if a \code{cluster} object is
+passed to \code{cl_sock} argument. The function uses the \code{parallel}
+package, the set of copies of R running in has to be already in place.
 }
