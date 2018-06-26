@@ -25,6 +25,8 @@ among them. Dissimilarity is defined as the euclidean distance.
 The function accepts a numeric value vector (or matrix of numeric values) and returns Rao's index.
 It is particularly useful in remote sensing applications as it can be used to calculate a temporal diversity index
 between layers of raster stacks.
+
+Currently only euclidean distance is supported to compute pairwise distance.
 }
 \examples{
 i <- 1; j <- 200

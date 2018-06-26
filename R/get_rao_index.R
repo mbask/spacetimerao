@@ -12,6 +12,7 @@
 #' It is particularly useful in remote sensing applications as it can be used to calculate a temporal diversity index
 #' between layers of raster stacks.
 #'
+#' Currently only euclidean distance is supported to compute pairwise distance.
 #'
 #' @param numeric_v numeric vector of 3 values at the very least
 #'
