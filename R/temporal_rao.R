@@ -16,7 +16,7 @@
 #' @return a single layer raster with same extent as the
 #' \code{raster_stack} raster stack
 #' @export
-get_rao_raster_accross <- function(raster_stack, cl_sock = NULL) {
+temporal_rao <- function(raster_stack, cl_sock = NULL) {
   if (!requireNamespace("raster", quietly = TRUE))
     stop("Need 'raster' package to run Rao's index computation on rasters.")
 

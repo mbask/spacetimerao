@@ -18,7 +18,7 @@
 #' @return a function accepting a numeric index relative to the layer
 #'         of the \code{raster_stack} where Rao's index has to be calculated
 #' @export
-moving_window_maker <- function(raster_stack, window_dims_v, parallel = FALSE) {
+spatial_rao_maker <- function(raster_stack, window_dims_v, parallel = FALSE) {
 
   rao_on_vector <- function(window_a) {
     get_rao_index(as.vector(window_a))
