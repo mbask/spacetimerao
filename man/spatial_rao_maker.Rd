@@ -5,7 +5,8 @@
 \title{Return a function to perform the computatin of Rao's index on a moving
 window on a raster layer}
 \usage{
-spatial_rao_maker(raster_stack, window_dims_v, parallel = FALSE)
+spatial_rao_maker(raster_stack, window_dims_v, parallel = FALSE,
+  is_rao = TRUE)
 }
 \arguments{
 \item{raster_stack}{a raster stack of layers that will be used by the
@@ -15,6 +16,8 @@ returned function to calculate Rao'index}
 and y pixels for the moving window}
 
 \item{parallel}{whether or not to calculate the index in parallel}
+
+\item{is_rao}{boolean to get Rao's index back (default) or Shannon's index}
 }
 \value{
 a function accepting a numeric index relative to the layer

@@ -14,14 +14,15 @@
 #' @param window_dims_v a 2 element numeric vector of the count of x
 #'        and y pixels for the moving window
 #' @param parallel   whether or not to calculate the index in parallel
+#' @param is_rao    boolean to get Rao's index back (default) or Shannon's index
 #'
 #' @return a function accepting a numeric index relative to the layer
 #'         of the \code{raster_stack} where Rao's index has to be calculated
 #' @export
-spatial_rao_maker <- function(raster_stack, window_dims_v, parallel = FALSE) {
+spatial_rao_maker <- function(raster_stack, window_dims_v, parallel = FALSE, is_rao = TRUE) {
 
   rao_on_vector <- function(window_a) {
-    get_rao_index(as.vector(window_a))
+    get_rao_index(as.vector(window_a), is_rao)
   }
 
   is.even <- function(x) { x %% 2 == 0 }

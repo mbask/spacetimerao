@@ -4,10 +4,12 @@
 \alias{get_rao_index}
 \title{Rao's index of a numeric vector}
 \usage{
-get_rao_index(numeric_v)
+get_rao_index(numeric_v, is_rao = TRUE)
 }
 \arguments{
 \item{numeric_v}{numeric vector of 3 values at the very least}
+
+\item{is_rao}{boolean to get Rao's index back (default) or Shannon's index}
 }
 \value{
 a scalar value (the rao's index)

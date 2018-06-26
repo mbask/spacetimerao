@@ -12,11 +12,12 @@
 #' @param cl_sock a \code{c("SOCKcluster", "cluster")} object as given by
 #'        \code{parallel::makeCluster} or \code{NULL} (default) to
 #'        perform serial computation
+#' @param is_rao    boolean to get Rao's index back (default) or Shannon's index
 #'
 #' @return a single layer raster with same extent as the
 #' \code{raster_stack} raster stack
 #' @export
-temporal_rao <- function(raster_stack, cl_sock = NULL) {
+temporal_rao <- function(raster_stack, cl_sock = NULL, is_rao) {
   if (!requireNamespace("raster", quietly = TRUE))
     stop("Need 'raster' package to run Rao's index computation on rasters.")
 
@@ -27,7 +28,8 @@ temporal_rao <- function(raster_stack, cl_sock = NULL) {
     rao_m <- apply(
       X      = raster::as.array(raster_stack),
       MARGIN = c(1, 2),
-      FUN    = spacetimerao::get_rao_index)
+      FUN    = spacetimerao::get_rao_index,
+      is_rao)
   } else {
     if (!"cluster" %in% class(cl_sock))
       stop("Do not know what to do with a ", class(cl_sock), " object; expecting a 'cluster' object to run parallel computation of Rao's index.")
@@ -39,7 +41,8 @@ temporal_rao <- function(raster_stack, cl_sock = NULL) {
       cl     = cl_sock,
       X      = raster::as.array(raster_stack),
       MARGIN = c(1, 2),
-      FUN    = spacetimerao::get_rao_index)
+      FUN    = spacetimerao::get_rao_index,
+      is_rao)
   }
 
   if (!is.matrix(rao_m))

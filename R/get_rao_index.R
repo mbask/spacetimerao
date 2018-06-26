@@ -15,6 +15,7 @@
 #' Currently only euclidean distance is supported to compute pairwise distance.
 #'
 #' @param numeric_v numeric vector of 3 values at the very least
+#' @param is_rao    boolean to get Rao's index back (default) or Shannon's index
 #'
 #' @return a scalar value (the rao's index)
 #' @export
@@ -37,7 +38,7 @@
 #' M <- matrix(m, byrow = TRUE, nrow = 3)
 #' identical(get_rao_index(M), get_rao_index(m))
 #' # [1] TRUE
-get_rao_index <- function(numeric_v) {
+get_rao_index <- function(numeric_v, is_rao = TRUE) {
 
   stopifnot(is.numeric(numeric_v))
   stopifnot(length(numeric_v) > 2)
@@ -51,21 +52,28 @@ get_rao_index <- function(numeric_v) {
 
         # proportion table of values
         p <- table(no_nas_numeric_v) / length(no_nas_numeric_v)
-        # character vector of values
-        values_v <- as.numeric(rownames(p))
-        # vector of euclidean distances of all pairwise combinations of values
-        pairwise_dists_v <- apply(
-          X      = RcppAlgos::comboGeneral(values_v, 2),
-          MARGIN = 1,
-          FUN    = function(pair_v) {abs(pair_v[1] - pair_v[2])})
-        # vector of products of all pairwise combinations of proportions
-        pairwise_product_v <- apply(
-          X      = RcppAlgos::comboGeneral(p, 2),
-          MARGIN = 1,
-          FUN    = prod,
-          na.rm  = TRUE)
-        # summation of the pairwise products of distances and proportions
-        sum(pairwise_dists_v * pairwise_product_v)
+
+        if (is_rao) {
+          # Rao's index
+          # character vector of values
+          values_v <- as.numeric(rownames(p))
+          # vector of euclidean distances of all pairwise combinations of values
+          pairwise_dists_v <- apply(
+            X      = RcppAlgos::comboGeneral(values_v, 2),
+            MARGIN = 1,
+            FUN    = function(pair_v) {abs(pair_v[1] - pair_v[2])})
+          # vector of products of all pairwise combinations of proportions
+          pairwise_product_v <- apply(
+            X      = RcppAlgos::comboGeneral(p, 2),
+            MARGIN = 1,
+            FUN    = prod,
+            na.rm  = TRUE)
+          # summation of the pairwise products of distances and proportions
+          sum(pairwise_dists_v * pairwise_product_v)
+        } else {
+          # Shannon's diversity index
+          -sum(p * log(p))
+        }
       }
     }
 }

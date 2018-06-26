@@ -4,7 +4,7 @@
 \alias{temporal_rao}
 \title{Computation of Rao's index on each raster stack pixel accross its layers}
 \usage{
-temporal_rao(raster_stack, cl_sock = NULL)
+temporal_rao(raster_stack, cl_sock = NULL, is_rao)
 }
 \arguments{
 \item{raster_stack}{the multi-layer raster stack}
@@ -12,6 +12,8 @@ temporal_rao(raster_stack, cl_sock = NULL)
 \item{cl_sock}{a \code{c("SOCKcluster", "cluster")} object as given by
 \code{parallel::makeCluster} or \code{NULL} (default) to
 perform serial computation}
+
+\item{is_rao}{boolean to get Rao's index back (default) or Shannon's index}
 }
 \value{
 a single layer raster with same extent as the
